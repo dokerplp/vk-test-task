@@ -27,6 +27,8 @@
 
 ## Use Case
 
+![use case](./use-case-diagram.png)
+
 ## Архитектура 
 
 
