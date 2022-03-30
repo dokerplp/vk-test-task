@@ -1,4 +1,4 @@
-# frontend
+# vk-test-task
 
 ## Project setup
 ```
