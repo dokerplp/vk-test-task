@@ -15,7 +15,7 @@ class AuthController(
     @Autowired private val userService: UserService
 ) {
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     fun login(@RequestBody authDto: AuthDto): Boolean {
         return userService.findUserByLoginAndPassword(authDto.login, authDto.pass.toCharArray()) != null
     }

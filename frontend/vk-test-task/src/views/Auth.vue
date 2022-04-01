@@ -39,16 +39,6 @@
 
 import store from "@/store";
 
-async function postData(url, data) {
-  return await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    },
-    body: JSON.stringify(data)
-  })
-}
-
 export default {
   name: 'Auth',
   components: {
@@ -61,24 +51,7 @@ export default {
   },
   methods: {
     sign_in() {
-      postData('/login', {
-        login: this.login,
-        pass: this.pass
-      })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-          });
-    },
-    sign_up() {
-      postData('/login', {
-        login: this.login,
-        pass: this.pass
-      })
-          .then(response => response.json())
-          .then(data => {
-            console.log(data)
-          });
+      this.$store.dispatch('SIGN_IN', {login: this.login, pass: this.pass});
     }
   }
 }

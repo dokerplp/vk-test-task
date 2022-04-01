@@ -32,14 +32,25 @@ export default createStore({
       state.isUserAuth = payload
     },
     SET_LOGIN: (state, payload) => {
-      alert(payload)
       state.userLogin = payload
     },
     SET_PASSWORD: (state, payload) => {
-      this.state.userPassword = payload
+      state.userPassword = payload
     }
   },
   actions: {
+    SIGN_IN: (context, name) => {
+      postData('/api/login', name)
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            context.commit('SET_LOGIN', name.login)
+            context.commit('SET_PASSWORD', name.pass)
+            context.commit('SET_AUTH', true)
+          }
+          console.log(data)
+        })
+    }
   },
   modules: {
   }
