@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <header>{{auth}}</header>
+    <header>Sylwan</header>
     <div id="content">
-      <Main v-if="auth"/>
-      <Auth v-else />
+      <router-view />
     </div>
     <footer><a href="https://github.com/dokerplp/vk-test-task">Link to GitHub project</a></footer>
   </div>
@@ -11,15 +10,7 @@
 
 <script>
 
-import Auth from '@/views/Auth'
-
 export default {
-  components: { Auth },
-  computed: {
-    auth () {
-      return this.$store.getters.AUTH
-    }
-  }
 }
 </script>
 

@@ -102,16 +102,18 @@ export default {
       return correct
     },
     register () {
-      this.validate()
-      this.$store.dispatch('SIGN_UP', {
-        auth: {
-          login: this.login,
-          pass: this.pass
-        },
-        name: this.name,
-        surname: this.surname,
-        birthday: this.birthday
-      })
+      if (this.validate()) {
+        this.$store.dispatch('SIGN_UP', {
+          auth: {
+            login: this.login,
+            pass: this.pass
+          },
+          name: this.name,
+          surname: this.surname,
+          birthday: this.birthday
+        })
+        this.$router.push({name: 'home'})
+      }
     },
     toggle () {
       this.$emit('toggleRegister')

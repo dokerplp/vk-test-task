@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import router from "@/router";
 
 async function postData (url, data) {
   return await fetch(url, {
@@ -62,6 +63,11 @@ export default createStore({
           }
           console.log(data)
         })
+    },
+    LOG_OUT: (context) => {
+      context.commit('SET_LOGIN', '')
+      context.commit('SET_PASSWORD', '')
+      context.commit('SET_AUTH', false)
     }
   },
   modules: {

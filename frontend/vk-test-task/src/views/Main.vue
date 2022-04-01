@@ -4,7 +4,7 @@
       <Panel/>
     </div>
     <div id="right">
-      <Profile/>
+      <router-view/>
     </div>
   </div>
 </template>
@@ -16,7 +16,6 @@ import Panel from "@/components/Panel";
 export default {
   name: "Main",
   components: {Panel, Profile}
-
 }
 </script>
 

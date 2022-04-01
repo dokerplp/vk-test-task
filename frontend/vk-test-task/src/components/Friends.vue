@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    Friend
+  </div>
 </template>
 
 <script>

@@ -1,5 +1,7 @@
 <template>
-
+  <div>
+    Messages
+  </div>
 </template>
 
 <script>

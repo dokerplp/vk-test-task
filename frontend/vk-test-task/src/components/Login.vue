@@ -50,6 +50,7 @@ export default {
   methods: {
     sign_in () {
       this.$store.dispatch('SIGN_IN', { login: this.login, pass: this.pass })
+      this.$router.push({name: 'home'})
     },
     toggle () {
       this.$emit('toggleRegister')
