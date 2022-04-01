@@ -20,7 +20,7 @@ class PassHashing {
         return salt
     }
 
-    fun hash(salt: ByteArray?, pass: CharArray?): ByteArray? {
+    fun hash(salt: ByteArray, pass: CharArray): ByteArray {
         val spec: KeySpec = PBEKeySpec(StringBuilder().append(pass).append(pepper).toString().toCharArray(), salt, 65536, 128)
         val factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
         return factory.generateSecret(spec).encoded

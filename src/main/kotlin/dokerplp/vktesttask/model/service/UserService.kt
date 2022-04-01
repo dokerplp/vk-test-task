@@ -5,6 +5,7 @@ import dokerplp.vktesttask.model.repository.UserRepository
 import dokerplp.vktesttask.security.PassHashing
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.Arrays
 
 
 @Service
@@ -15,7 +16,18 @@ class UserService(
 
     fun findUserByLoginAndPassword(login: String, password: CharArray): User? {
         val user = userRepository.findByLogin(login) ?: return null
-        return if (passHashing.hash(user.salt, password).contentEquals(user.password)) user else null
+        val p = passHashing.hash(user.salt, password)
+        val pp = user.password
+        return if (p.contentEquals(pp)) user else null
+    }
+
+    fun save(user: User): Boolean {
+        return try {
+            userRepository.save(user)
+            true
+        } catch (e: Throwable) {
+            false
+        }
     }
 
 }

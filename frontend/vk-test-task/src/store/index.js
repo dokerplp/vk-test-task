@@ -40,7 +40,19 @@ export default createStore({
   },
   actions: {
     SIGN_IN: (context, name) => {
-      postData('/api/login', name)
+      postData('/api/sign-in', name)
+        .then(response => response.json())
+        .then(data => {
+          if (data) {
+            context.commit('SET_LOGIN', name.login)
+            context.commit('SET_PASSWORD', name.pass)
+            context.commit('SET_AUTH', true)
+          }
+          console.log(data)
+        })
+    },
+    SIGN_UP: (context, name) => {
+      postData('/api/sign-up', name)
         .then(response => response.json())
         .then(data => {
           if (data) {
