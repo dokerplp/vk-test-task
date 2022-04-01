@@ -1,30 +1,67 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div id="app">
+    <header>Sylwan</header>
+    <div id="content">
+      <Auth v-if="!auth" />
+      <Main v-else />
+    </div>
+    <footer><a href="https://github.com/dokerplp/vk-test-task">Link to GitHub project</a></footer>
+  </div>
 </template>
 
-<style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-nav {
-  padding: 30px;
+import store from '@/store'
+import Auth from '@/views/Auth'
+import Main from '@/views/Main'
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: { Main, Auth },
+  data () {
+    return {
+      auth: store.getters.AUTH
     }
   }
 }
+</script>
+
+<style>
+#content {
+  position: relative
+}
+
+header, footer {
+  background-color: rgba(78,78,78,0.96);
+  color: rgba(255,159,208,0.96);
+}
+
+header {
+  font-weight: bold;
+  font-size: 200%;
+}
+
+footer {
+  font-size: 120%;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+footer * {
+  font-weight: bold;
+  background-color: rgba(78,78,78,0.96);
+  color: rgba(255,159,208,0.96);
+}
+
+body {
+  margin: 0; padding: 0;
+}
+
+* {
+  background-color: rgb(164, 164, 164);
+  font-family: "ALS Schlange sans", monospace;
+  color: aliceblue;
+  font-weight: normal;
+  text-align: center;
+}
+
 </style>
