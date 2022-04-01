@@ -14,11 +14,13 @@ class UserService(
     @Autowired private val userRepository: UserRepository
 ) {
 
+    fun findUserByLogin(login: String): User? {
+        return userRepository.findByLogin(login)
+    }
+
     fun findUserByLoginAndPassword(login: String, password: CharArray): User? {
         val user = userRepository.findByLogin(login) ?: return null
-        val p = passHashing.hash(user.salt, password)
-        val pp = user.password
-        return if (p.contentEquals(pp)) user else null
+        return if (passHashing.hash(user.salt, password).contentEquals(user.password)) user else null
     }
 
     fun save(user: User): Boolean {
@@ -28,6 +30,10 @@ class UserService(
         } catch (e: Throwable) {
             false
         }
+    }
+
+    fun update(user: User) {
+        userRepository.update(user.name, user.surname, user.birthday, user.login)
     }
 
 }

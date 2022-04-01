@@ -1,7 +1,6 @@
 import { createStore } from 'vuex'
-import router from "@/router";
 
-async function postData (url, data) {
+export async function postData (url, data) {
   return await fetch(url, {
     method: 'POST',
     headers: {
