@@ -58,7 +58,6 @@ export default createStore({
           if (data) {
             context.commit('SET_LOGIN', name.login)
             context.commit('SET_PASSWORD', name.pass)
-            context.commit('SET_AUTH', true)
           }
           console.log(data)
         })

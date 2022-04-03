@@ -10,6 +10,11 @@ import Register from "@/components/Register";
 
 export default {
   name: 'Auth',
+  computed: {
+    auth() {
+      return this.$store.getters.AUTH
+    }
+  },
   data () {
     return {
       register: false
@@ -22,6 +27,14 @@ export default {
   methods: {
     toggleRegister() {
       this.register = !this.register
+    },
+    goHome() {
+      this.$router.push({path: '/home/'})
+    }
+  },
+  watch: {
+    auth: function(val) {
+      this.goHome()
     }
   }
 }

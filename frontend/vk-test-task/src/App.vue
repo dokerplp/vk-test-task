@@ -4,7 +4,6 @@
     <div id="content">
       <router-view />
     </div>
-    <footer><a href="https://github.com/dokerplp/vk-test-task">Link to GitHub project</a></footer>
   </div>
 </template>
 

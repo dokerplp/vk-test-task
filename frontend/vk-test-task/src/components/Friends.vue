@@ -44,7 +44,7 @@
           <td>
             {{new Date(friend.birthday).toISOString().slice(0, 10)}}
           </td>
-          <td id="message_button">
+          <td id="message_button" v-on:click="message(friend.login)">
             Message
           </td>
           <td id="delete_button" v-on:click="deleteUser(friend.login)">
@@ -72,7 +72,7 @@
           <td id="accept_button" v-on:click="addFriend(request.login)">
             Accept
           </td>
-          <td id="decline_button">
+          <td id="decline_button" v-on:click="decline(request.login)">
             Decline
           </td>
         </tr>
@@ -103,6 +103,20 @@ export default {
     }
   },
   methods: {
+    decline (login) {
+      postData('/api/cancel-friend', {
+        auth: {
+          login: this.$store.getters.LOGIN,
+          pass: this.$store.getters.PASS
+        },
+        friend: login
+      })
+      this.initFriends()
+      this.initRequests()
+    },
+    message(login) {
+      this.$router.push({ name: 'message', params: { login: login } })
+    },
     addFriend (user) {
       postData('/api/add-friend', {
         auth: {
@@ -224,13 +238,7 @@ export default {
   color: rgba(78,78,78,0.96);
 }
 
-#data tbody tr #message_button {
-  font-weight: bold;
-  background: rgba(255,159,208,0.96);
-  color: rgba(78,78,78,0.96);
-}
-
-#data tbody tr #delete_button {
+#message_button, #delete_button, #accept_button, #decline_button {
   font-weight: bold;
   background: rgba(255,159,208,0.96);
   color: rgba(78,78,78,0.96);

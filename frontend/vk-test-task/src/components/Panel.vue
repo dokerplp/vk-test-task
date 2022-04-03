@@ -6,9 +6,6 @@
     <div id="my_friends" v-on:click="redirect('/home/friends')">
       Friends
     </div>
-    <div id="my_messages" v-on:click="redirect('/home/messages')">
-      Messager
-    </div>
     <div id="log_out" v-on:click="log_out">
       Log out
     </div>

@@ -50,7 +50,6 @@ export default {
   methods: {
     sign_in () {
       this.$store.dispatch('SIGN_IN', { login: this.login, pass: this.pass })
-      this.$router.push({path: '/home/'})
     },
     toggle () {
       this.$emit('toggleRegister')
@@ -76,8 +75,6 @@ export default {
   font-weight: bold;
   border-radius: 8px 8px 0 0;
 }
-
-
 #auth div:last-child {
   font-size: 20px;
   background-color: rgba(107,107,107,0.96);

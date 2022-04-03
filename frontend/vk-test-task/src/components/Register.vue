@@ -112,7 +112,6 @@ export default {
           surname: this.surname,
           birthday: this.birthday
         })
-        this.$router.push({name: 'home'})
       }
     },
     toggle () {

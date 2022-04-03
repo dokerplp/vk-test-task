@@ -19,7 +19,7 @@ const routes = [
     children: [
       { path: '', component: Profile },
       { path: 'friends', component: Friends },
-      { path: 'messages', component: Messages }
+      { name: 'message', path: 'messages/:login', component: Messages }
     ]
   }
 ]

@@ -55,8 +55,13 @@ class FriendsController(
     }
 
     @PostMapping("/api/cancel-friend")
-    fun cancelRequest() {
-
+    fun cancelRequest(@RequestBody friendDto: GetFriendDto): Boolean {
+        val pair = userService.getPair(friendDto.auth, friendDto.friend) ?: return false
+        val user = pair.first
+        val friend = pair.second
+        user.requests.removeIf { it.login == friend.login }
+        userService.save(user)
+        return true
     }
 
     @PostMapping("/api/friends-list")

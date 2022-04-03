@@ -22,6 +22,12 @@ class MessageService (
     }
 
     fun getAllByLogin(user: Long, friend: Long): List<Message> {
-        return messageRepository.findAllByUseridAndFriendid(user, friend)
+        val arr1 = messageRepository.findAllByUseridAndFriendid(user, friend)
+        val arr2 = messageRepository.findAllByUseridAndFriendid(friend, user)
+        val list = ArrayList<Message>()
+        for (el in arr1) list.add(el)
+        for (el in arr2) list.add(el)
+        list.sortByDescending { it.time }
+        return list
     }
 }
