@@ -8,13 +8,14 @@ import org.springframework.stereotype.Component
 import java.util.*
 
 @SpringBootTest
+@Component
 class PassHashingTest(
     @Autowired private val passHashing: PassHashing
 )
 {
 
     @Test
-    fun hashTest() {
+    fun salt() {
         val password = "aboba"
         val salt = passHashing.salt()
 
@@ -25,18 +26,6 @@ class PassHashingTest(
     }
 
     @Test
-    fun userTest() {
-        val login = "login"
-        val password = "qwertyuiop"
-        val salt = passHashing.salt()
-
-        val user = User(
-            login = "login",
-            name = login,
-            surname = "login",
-            birthday = Date(),
-            salt = salt,
-            password = passHashing.hash(salt, password.toCharArray())
-        )
+    fun hash() {
     }
 }

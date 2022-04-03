@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional
 import java.util.*
 
 interface UserRepository : CrudRepository<User,  Long> {
+
+    @Transactional
+    fun removeByLogin(login: String)
+
     fun findByLogin(login: String): User?
 
     @Modifying
