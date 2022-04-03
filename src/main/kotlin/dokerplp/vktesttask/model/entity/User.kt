@@ -6,7 +6,7 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "users")
-class User () {
+class User() {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
@@ -30,13 +30,25 @@ class User () {
     @Column(name = "birthday", nullable = false)
     lateinit var birthday: Date
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "friends",
+        joinColumns = [
+            JoinColumn(name = "userid")
+        ],
+        inverseJoinColumns = [
+            JoinColumn(name = "friendid")
+        ],
+    )
+    lateinit var friends: MutableList<User>
+
     constructor(
-                login: String,
-                password: ByteArray,
-                salt: ByteArray,
-                name: String,
-                surname: String,
-                birthday: Date
+        login: String,
+        password: ByteArray,
+        salt: ByteArray,
+        name: String,
+        surname: String,
+        birthday: Date
     ) : this() {
         this.login = login
         this.password = password

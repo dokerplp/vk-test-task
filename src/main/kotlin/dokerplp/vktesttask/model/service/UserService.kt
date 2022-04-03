@@ -1,5 +1,6 @@
 package dokerplp.vktesttask.model.service
 
+import dokerplp.vktesttask.model.dto.AuthDto
 import dokerplp.vktesttask.model.entity.User
 import dokerplp.vktesttask.model.repository.UserRepository
 import dokerplp.vktesttask.security.PassHashing
@@ -34,6 +35,19 @@ class UserService(
 
     fun update(user: User) {
         userRepository.update(user.name, user.surname, user.birthday, user.login)
+    }
+
+    fun checkPair(authDto: AuthDto, login: String): Pair<Long, Long>? {
+        val user = findUserByLoginAndPassword(authDto.login, authDto.pass.toCharArray())
+            ?: return null
+        val friend = findUserByLogin(login) ?: return null
+        return Pair(user.id, friend.id)
+    }
+
+    fun getPair(authDto: AuthDto, login: String): Pair<User, User>? {
+        val user = findUserByLoginAndPassword(authDto.login, authDto.pass.toCharArray()) ?: return null
+        val friend = findUserByLogin(login) ?: return null
+        return Pair(user, friend)
     }
 
 }

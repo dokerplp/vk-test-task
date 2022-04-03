@@ -7,6 +7,7 @@ import dokerplp.vktesttask.model.dto.UserDto
 import dokerplp.vktesttask.model.entity.User
 import dokerplp.vktesttask.model.service.UserService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -20,6 +21,7 @@ class UserController(
     @PostMapping("/api/user")
     fun getUser(@RequestBody loginDto: LoginDto): UserDto? {
         val user = userService.findUserByLogin(loginDto.login) ?: return null
+        for (u in user.friends) println(u.login + " " + u.accept)
         return UserDto(user.name, user.surname, user.birthday)
     }
 
