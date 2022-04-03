@@ -42,6 +42,19 @@ class User() {
     )
     lateinit var friends: MutableList<User>
 
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @JoinTable(
+        name = "requests",
+        joinColumns = [
+            JoinColumn(name = "userid")
+        ],
+        inverseJoinColumns = [
+            JoinColumn(name = "friendid")
+        ],
+    )
+    lateinit var requests: MutableList<User>
+
     constructor(
         login: String,
         password: ByteArray,

@@ -21,7 +21,6 @@ class UserController(
     @PostMapping("/api/user")
     fun getUser(@RequestBody loginDto: LoginDto): UserDto? {
         val user = userService.findUserByLogin(loginDto.login) ?: return null
-        for (u in user.friends) println(u.login + " " + u.accept)
         return UserDto(user.name, user.surname, user.birthday)
     }
 
