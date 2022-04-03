@@ -40,7 +40,7 @@ class User() {
             JoinColumn(name = "friendid")
         ],
     )
-    lateinit var friends: MutableList<User>
+    lateinit var friends: MutableSet<User>
 
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = [CascadeType.ALL])

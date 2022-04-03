@@ -21,12 +21,14 @@ class FriendsController(
         val pair = userService.getPair(friendDto.auth, friendDto.friend) ?: return false
         val user = pair.first
         val friend = pair.second
-        user.friends.find { user.login == friend.login } ?: return false
-        user.requests.find { user.login == friend.login } ?. let {
-            friend.requests.add(user)
-        } ?: run {
+        if (user.friends.find { it.login == friend.login } != null) return false
+        user.requests.find { it.login == friend.login } ?. let {
             user.friends.add(friend)
             friend.friends.add(user)
+            user.requests.removeIf { it.login == friend.login }
+            friend.requests.removeIf { it.login == user.login }
+        } ?: run {
+            friend.requests.add(user)
         }
         userService.save(user)
         userService.save(friend)
