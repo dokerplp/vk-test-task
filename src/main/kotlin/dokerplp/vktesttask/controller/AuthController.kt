@@ -1,13 +1,11 @@
 package dokerplp.vktesttask.controller
 
 import dokerplp.vktesttask.model.dto.AuthDto
-import dokerplp.vktesttask.model.dto.RegisterDto
+import dokerplp.vktesttask.model.dto.GetRegisterDto
 import dokerplp.vktesttask.model.entity.User
 import dokerplp.vktesttask.model.service.UserService
 import dokerplp.vktesttask.security.PassHashing
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -24,7 +22,7 @@ class AuthController(
     }
 
     @PostMapping("/api/sign-up")
-    fun signUp(@RequestBody registerDto: RegisterDto): Boolean {
+    fun signUp(@RequestBody registerDto: GetRegisterDto): Boolean {
         val salt = passHashing.salt()
         val pass = passHashing.hash(salt, registerDto.auth.pass.toCharArray())
         return userService.save(

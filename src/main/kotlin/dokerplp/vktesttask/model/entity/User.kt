@@ -53,7 +53,7 @@ class User() {
             JoinColumn(name = "friendid")
         ],
     )
-    lateinit var requests: MutableList<User>
+    lateinit var requests: MutableSet<User>
 
     constructor(
         login: String,

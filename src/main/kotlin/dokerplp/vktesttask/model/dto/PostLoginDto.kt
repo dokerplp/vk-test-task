@@ -1,5 +1,5 @@
 package dokerplp.vktesttask.model.dto
 
-data class LoginDto (
+data class PostLoginDto (
     val login: String
 )
