@@ -1,1 +1,1 @@
-web: java -jar release/release.jar
+web: java $JAVA_OPTS -Dserver.port=$PORT -jar release/release.jar
