@@ -103,7 +103,7 @@ class FriendsControllerTest(
         assert(u2.requests.size == 0)
 
         friendsController.addFriend(GetFriendDto(AuthDto("test1", "test"), "test2"))
-        friendsController.addFriend(GetFriendDto(AuthDto("test2", "test"), "test2"))
+        friendsController.addFriend(GetFriendDto(AuthDto("test2", "test"), "test1"))
 
         u1 = userService.findUserByLoginAndPassword("test1", "test".toCharArray())!!
         u2 = userService.findUserByLoginAndPassword("test2", "test".toCharArray())!!
@@ -152,6 +152,7 @@ class FriendsControllerTest(
         assert(u2.requests.size == 1)
 
         friendsController.cancelRequest(GetFriendDto(AuthDto("test2", "test"), "test1"))
+        u2 = userService.findUserByLoginAndPassword("test2", "test".toCharArray())!!
 
         assert(u1.friends.size == 0)
         assert(u2.friends.size == 0)
@@ -187,9 +188,6 @@ class FriendsControllerTest(
 
         assert(u1.friends.size == 2)
 
-        assert(u1.friends.contains(u2))
-        assert(u1.friends.contains(u3))
-
         userService.findUserByLogin("test1") ?. let {  userRepository.removeByLogin("test1") }
         userService.findUserByLogin("test2") ?. let {  userRepository.removeByLogin("test2") }
         userService.findUserByLogin("test3") ?. let {  userRepository.removeByLogin("test3") }
@@ -220,9 +218,6 @@ class FriendsControllerTest(
         u1 = userService.findUserByLoginAndPassword("test1", "test".toCharArray())!!
 
         assert(u1.requests.size == 2)
-
-        assert(u1.requests.contains(u2))
-        assert(u1.requests.contains(u3))
 
         userService.findUserByLogin("test1") ?. let {  userRepository.removeByLogin("test1") }
         userService.findUserByLogin("test2") ?. let {  userRepository.removeByLogin("test2") }
