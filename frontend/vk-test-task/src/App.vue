@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <header>Sylwan</header>
+    <header>Valerii Butorin VK test task</header>
     <div id="content">
       <router-view />
     </div>
